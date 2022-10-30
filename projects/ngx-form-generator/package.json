@@ -1,6 +1,7 @@
 {
   "name": "ngx-form-generator",
   "version": "0.0.1",
+  "private":false,
   "peerDependencies": {
     "@angular/common": "^11.1.2",
     "@angular/core": "^11.1.2",
