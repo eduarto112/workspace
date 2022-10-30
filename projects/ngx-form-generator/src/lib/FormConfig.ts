@@ -1,6 +1,6 @@
 import { ValidatorFn } from "@angular/forms";
 
-export default interface FormConfig {
+export interface FormConfig {
   [key: string]:
   | {
     disable?: boolean;

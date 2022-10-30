@@ -1,8 +1,8 @@
 import { FormArray, FormControl, FormGroup } from "@angular/forms";
-import FormConfig from "./FormConfig";
+import { FormConfig } from "./FormConfig";
 
 
-export default function generateFormGroup<T>(data: T, config?: FormConfig): FormGroup {
+export function generateFormGroup<T>(data: T, config?: FormConfig): FormGroup {
   if (data) {
     const objectKeys = Object.keys(data);
     let formGroupData: any = {};

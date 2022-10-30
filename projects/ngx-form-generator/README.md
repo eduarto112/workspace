@@ -1,24 +1,89 @@
 # NgxFormGenerator
 
-This library was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.1.2.
+This is a package created to help you with the instantiation of the FormGroup object
 
-## Code scaffolding
+## Basic Usage
 
-Run `ng generate component component-name --project ngx-form-generator` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module --project ngx-form-generator`.
-> Note: Don't forget to add `--project ngx-form-generator` or else it will be added to the default project in your `angular.json` file. 
+```ts
+import { generateFormGrop } from "ngx-form-generator2";
 
-## Build
+interface Person {
+  name: string;
+  age: number;
+}
 
-Run `ng build ngx-form-generator` to build the project. The build artifacts will be stored in the `dist/` directory.
+const data:Person{
+  name:'',
+  age:0
+}
 
-## Publishing
+const formGroup = generateFormGroup<Person>(data, config);
 
-After building your library with `ng build ngx-form-generator`, go to the dist folder `cd dist/ngx-form-generator` and run `npm publish`.
+console.log(JSON.stringify(formGroup.value));
 
-## Running unit tests
+// {
+//   "name":"",
+//   "age":0
+// }
+```
 
-Run `ng test ngx-form-generator` to execute the unit tests via [Karma](https://karma-runner.github.io).
+## Basic Configuration
 
-## Further help
+For adding Validation
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+```ts
+import { Validators } from '@angular/forms';
+import { generateFormGrop, FormConfig } from "ngx-form-generator2";
+
+interface Person {
+  name: string;
+  age: number;
+}
+
+const data:Person{
+  name:'',
+  age:0
+}
+
+const congfig: FormConfig={
+  name:{
+    validators: [Validators.required]
+  }
+}
+
+const formGroup = generateFormGroup<Person>(data, config);
+
+console.log(JSON.stringify(formGroup.controls.name.errors));
+
+//  {
+//    "required":true
+//  }
+```
+
+```ts
+import { generateFormGrop, FormConfig } from "ngx-form-generator2";
+
+interface Person {
+  name: string;
+  age: number;
+}
+
+const data:Person{
+  name:'',
+  age:0
+}
+
+const congfig: FormConfig={
+  name: {
+    disabled: true
+  }
+}
+
+const formGroup = generateFormGroup<Person>(data, config);
+
+console.log(JSON.stringify(formGroup.value));
+
+//  {
+//    "age":0
+//  }
+```
